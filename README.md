@@ -9,6 +9,7 @@ Aplicație complet statică, fără backend, conturi sau sincronizare. Fiecare i
 - calcul local al sărbătorilor legale din România, inclusiv sărbătorile ortodoxe mobile;
 - import pentru backup nativ și format desktop;
 - export JSON complet;
+- atingere directă pe o zi lucrătoare pentru adăugarea sau eliminarea Home Office;
 - copie locală de siguranță înainte de înlocuirea datelor prin import.
 
 ## Testare locală

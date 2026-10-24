@@ -1,6 +1,6 @@
 const assert=require("assert");
 global.HOHolidays=require("../js/holidays-ro.js");
-const rules=require("../js/rules.js"),backup=require("../js/backup.js");
+const rules=require("../js/rules.js"),backup=require("../js/backup.js"),calendar=require("../js/calendar.js");
 let passed=0;function test(name,fn){fn();passed++;console.log(`PASS ${passed}: ${name}`)}
 const weekdays=rules.normalWorkdays(2026,10);
 test("rotunjirea limitei de 50%",()=>{const abs=weekdays.slice(0,5);assert.strictEqual(rules.validateMonth(2026,10,[],abs).effective_workdays,17);assert.strictEqual(rules.validateMonth(2026,10,[],abs).maximum_ho,9)});
@@ -20,4 +20,8 @@ test("toate absențele reduc zilele efective",()=>{const abs={"2026-10-07":"CO",
 test("numai CO reduce soldul anual",()=>assert.strictEqual(rules.availableLeave(2026,{2026:26},{"2026-10-07":"CO","2026-10-08":"Bo"}),25));
 test("Bo, Fp, Lp și R nu reduc soldul anual",()=>assert.strictEqual(rules.availableLeave(2026,{2026:26},{"2026-10-08":"Bo","2026-10-09":"Fp","2026-10-12":"Lp","2026-10-13":"R"}),26));
 test("exportul și reimportul păstrează datele",()=>{const source={home_office_days:["2026-10-06"],absences:{"2026-10-07":"CO","2026-10-08":"Bo"},allowance:{2026:26},initialized:true};const roundtrip=backup.normalizeImportedBackup(backup.createNativeBackup(source));assert.deepStrictEqual(roundtrip.home_office_days,source.home_office_days);assert.deepStrictEqual(roundtrip.absences,source.absences);assert.deepStrictEqual(roundtrip.allowance,source.allowance)});
+
+test("touch adaugă și elimină Home Office",()=>{const plan={home_office_days:[],absences:{}};assert.strictEqual(calendar.toggleHomeOfficeDay(plan,"2026-10-06").action,"added");assert.deepStrictEqual(plan.home_office_days,["2026-10-06"]);assert.strictEqual(calendar.toggleHomeOfficeDay(plan,"2026-10-06").action,"removed");assert.deepStrictEqual(plan.home_office_days,[])});
+test("touch nu înlocuiește absența",()=>{const plan={home_office_days:[],absences:{"2026-10-07":"CO"}},result=calendar.toggleHomeOfficeDay(plan,"2026-10-07");assert.strictEqual(result.changed,false);assert.deepStrictEqual(plan.home_office_days,[]);assert.strictEqual(plan.absences["2026-10-07"],"CO")});
+test("touch blochează weekendul și sărbătoarea",()=>{const plan={home_office_days:[],absences:{}};assert.strictEqual(calendar.toggleHomeOfficeDay(plan,"2026-10-10",{weekend:true}).changed,false);assert.strictEqual(calendar.toggleHomeOfficeDay(plan,"2026-12-25",{holiday:true}).changed,false);assert.deepStrictEqual(plan.home_office_days,[])});
 console.log(`\n${passed} teste statice trecute.`);
