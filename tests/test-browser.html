@@ -1,0 +1,4 @@
+<!doctype html><html lang="ro"><head><meta charset="utf-8"><title>Test IndexedDB</title></head><body><h1>Test persistență IndexedDB</h1><button id="run">Rulează testul</button><pre id="result"></pre><script src="../js/database.js"></script><script>
+document.getElementById("run").onclick=async()=>{const out=document.getElementById("result"),token=`test-${Date.now()}`;try{await saveState({home_office_days:["2026-10-06"],absences:{},allowance:{},initialized:true,test_token:token});location.hash=token;location.reload()}catch(error){out.textContent=`FAIL: ${error.message}`}};
+(async()=>{if(!location.hash)return;const expected=location.hash.slice(1),loaded=await loadState();document.getElementById("result").textContent=loaded&&loaded.test_token===expected?"PASS: IndexedDB a păstrat datele după reîncărcare.":"FAIL: datele nu au fost regăsite."})();
+</script></body></html>
