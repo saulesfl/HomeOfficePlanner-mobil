@@ -10,6 +10,7 @@ Aplicație complet statică, fără backend, conturi sau sincronizare. Fiecare i
 - import pentru backup nativ și format desktop;
 - export JSON complet;
 - atingere directă pe o zi lucrătoare pentru adăugarea sau eliminarea Home Office;
+- afișarea denumirii sărbătorii legale la atingerea zilei;
 - copie locală de siguranță înainte de înlocuirea datelor prin import.
 
 ## Testare locală

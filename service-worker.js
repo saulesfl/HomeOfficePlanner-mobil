@@ -1,4 +1,4 @@
-const CACHE="ho-planner-static-v0.5.1";
+const CACHE="ho-planner-static-v0.5.2";
 const ASSETS=["./","./index.html","./manifest.json","./css/styles.css","./js/holidays-ro.js","./js/rules.js","./js/database.js","./js/calendar.js","./js/backup.js","./js/install.js","./js/app.js","./icons/icon-192.png","./icons/icon-512.png","./icons/icon-maskable-512.png"];
 self.addEventListener("install",event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)));self.skipWaiting()});
 self.addEventListener("activate",event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))));self.clients.claim()});
