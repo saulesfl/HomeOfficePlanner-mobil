@@ -1,0 +1,20 @@
+stages:
+  - deploy
+
+pages:
+  stage: deploy
+  script:
+    - mkdir -p public
+    - cp index.html public/
+    - cp manifest.json public/
+    - cp service-worker.js public/
+    - cp README.md public/
+    - cp -r css public/
+    - cp -r js public/
+    - cp -r icons public/
+    - cp -r tests public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
