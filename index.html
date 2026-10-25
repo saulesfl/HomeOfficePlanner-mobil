@@ -7,7 +7,7 @@
 </head>
 <body>
 <header class="app-header">
-  <div class="brand"><img src="./icons/icon-192.png" alt=""><div><p class="eyebrow">PWA Android offline</p><h1>Home Office Planner <small>v0.5.9</small></h1></div></div>
+  <div class="brand"><img src="./icons/icon-192.png" alt=""><div><p class="eyebrow">PWA Android offline</p><h1>Home Office Planner <small>v0.6.0</small></h1></div></div>
   <div class="header-tools"><button id="installButton" class="ghost" hidden>Instalează</button><button id="menuButton" class="menu-button" aria-label="Deschide meniul" aria-expanded="false">⋮</button>
     <div id="appMenu" class="app-menu" hidden><button id="exportButton">Exportă backup</button><label>Importă backup<input id="importInput" type="file" accept="application/json,.json"></label><a href="https://revolut.me/florinsaulescu" target="_blank" rel="noopener noreferrer">☕ Susține aplicația</a></div>
   </div>
@@ -18,7 +18,17 @@
   <div class="toolbar"><button id="previousMonth" aria-label="Luna precedentă">‹</button><div><h2 id="monthTitle"></h2><button id="todayButton" class="link-button" hidden>Astăzi</button></div><button id="nextMonth" aria-label="Luna următoare">›</button></div>
   <section class="summary-compact" aria-label="Rezumat lunar"><div class="summary-main"><span>Home Office</span><strong><span id="selectedHo">0</span> / <span id="maximumHo">0</span> zile</strong></div><div class="progress" aria-hidden="true"><span id="hoProgress"></span></div><p>Luni / Vineri: <b id="weekLinks">0 / 0</b><span>·</span> Concediu: <b id="availableLeave">0</b> zile</p></section>
   <div id="calendarSwipeArea" class="planner-layout">
-    <section class="calendar-card"><div class="weekdays"><span>Lu</span><span>Ma</span><span>Mi</span><span>Jo</span><span>Vi</span><span>Sa</span><span>Du</span></div><div id="calendarGrid" class="calendar-grid"></div></section>
+    <section class="calendar-card">
+      <div id="modeBar" class="mode-bar mode-select" role="toolbar" aria-label="Mod de lucru calendar">
+        <button type="button" data-mode="select" aria-pressed="true">☝ Selectare</button>
+        <button type="button" data-mode="ho" aria-pressed="false">🏠 HO</button>
+        <button type="button" data-mode="CO" aria-pressed="false">🏖 CO</button>
+        <button type="button" data-mode="Bo" aria-pressed="false">✚ Bo</button>
+        <button type="button" data-mode="clear" aria-pressed="false">🗑 Ștergere</button>
+        <details class="more-modes"><summary>Mai multe</summary><div><button type="button" data-mode="Fp">Fp · Fără plată</button><button type="button" data-mode="Lp">Lp · Liber plătit</button><button type="button" data-mode="R">R · Recuperare</button></div></details>
+      </div>
+      <div id="modeMessage" class="mode-message" aria-live="polite">Mod Selectare activ. Atinge o zi pentru detalii.</div>
+      <div class="weekdays"><span>Lu</span><span>Ma</span><span>Mi</span><span>Jo</span><span>Vi</span><span>Sa</span><span>Du</span></div><div id="calendarGrid" class="calendar-grid"></div></section>
     <aside id="selectedDayCard" class="side-card"><button id="closeDayCard" class="sheet-close" aria-label="Închide">×</button><h3 id="selectedDateTitle">Selectează o zi</h3><p id="selectedDateInfo">Selectează o zi din calendar pentru a o modifica.</p><div id="dayActions" hidden><div class="action-grid"><button data-action="ho">Home Office</button><button data-action="CO">Concediu planificat</button><button data-action="Bo">Concediu medical</button><button data-action="Fp">Concediu fără plată</button><button data-action="Lp">Liber plătit</button><button data-action="R">Recuperare</button></div><button data-action="clear" class="danger clear-action">Șterge înregistrarea</button></div><hr><label>Total concediu anual <input id="allowanceInput" type="number" min="0" inputmode="numeric"></label><details class="legend"><summary>Legendă</summary><b>HO</b> Home Office · <b>CO</b> concediu planificat<br><b>Bo</b> medical · <b>Fp</b> fără plată · <b>Lp</b> liber plătit · <b>R</b> recuperare</details></aside>
   </div>
   <section class="validation-card"><div id="validationStatus" class="validation pending">Se verifică...</div><button id="validationToggle" class="validation-toggle" aria-expanded="false">Vezi regulile</button><ul id="validationList" hidden></ul></section>
