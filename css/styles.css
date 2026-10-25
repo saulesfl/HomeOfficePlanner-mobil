@@ -20,3 +20,7 @@
 .toast-action{border:0;background:transparent;color:#93c5fd;font:inherit;font-weight:800;text-decoration:underline;cursor:pointer;margin-left:10px}
 @media(max-width:800px){.mode-bar{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:6px}.mode-bar>button,.more-modes>summary{justify-content:center;min-width:0;padding:7px 3px;font-size:.76rem}.more-modes>summary{height:44px}.mode-message{font-size:.84rem}.calendar-card{overflow:visible}}
 @media(max-width:420px){.mode-bar{grid-template-columns:repeat(3,1fr)}.more-modes>div{right:auto;left:0}}
+
+/* Instalare iOS, fără spațiu suplimentar deasupra calendarului */
+.ios-install-card{position:relative}.modal-close{position:absolute;right:12px;top:10px;width:42px;height:42px;border:0;border-radius:50%;background:#eef2f7;color:#334155;font-size:1.65rem;line-height:1;cursor:pointer}.ios-install-card h2{margin-top:0;padding-right:42px}.ios-install-steps{padding-left:24px;line-height:1.65}.ios-install-steps li{margin:10px 0}.ios-install-note{color:#64748b;font-size:.9rem}.ios-install-card .primary{min-height:44px;border:0;border-radius:9px;padding:10px 16px;background:var(--blue);color:#fff;font-weight:700;cursor:pointer}
+@media(max-width:420px){#installButton{max-width:104px;white-space:normal;line-height:1.05;padding:7px 8px;font-size:.78rem}}

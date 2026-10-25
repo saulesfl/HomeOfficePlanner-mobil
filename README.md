@@ -1,4 +1,4 @@
-# Home Office Planner Android PWA v0.6.0
+# Home Office Planner Android PWA v0.6.1
 
 Aplicație complet statică, fără backend, conturi sau sincronizare. Fiecare instalare păstrează datele exclusiv în IndexedDB pe dispozitivul respectiv.
 
@@ -46,3 +46,8 @@ Pentru testul IndexedDB în browser, deschide `http://127.0.0.1:8080/tests/test-
 - actualizarea service worker-ului nu șterge IndexedDB;
 - exportă periodic backupul JSON;
 - importul validează și rezumă datele, cere confirmare și creează o copie locală de siguranță.
+
+
+### Instalare iOS
+- În Safari pe iPhone/iPad, butonul „Instalare iOS” din antet deschide instrucțiunile pentru Partajare → Adăugați la ecranul principal.
+- În modul standalone, butonul de instalare este ascuns automat.
