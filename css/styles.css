@@ -30,3 +30,10 @@
 
 /* Panoul de concediu rămâne accesibil pe mobil după eliminarea modului Selectare. */
 @media(max-width:800px){.planner-layout>.side-card{position:static;transform:none;max-height:none;overflow:visible;margin-top:10px;border-radius:14px;padding:16px}.planner-layout>.side-card>label,.planner-layout>.side-card>.legend{display:block}.planner-layout>.side-card hr{display:none}}
+
+
+/* Validarea planului este afișată imediat sub rezumatul lunar. */
+#planner>.validation-card{max-width:760px;margin:0 auto 14px;padding:10px 12px}
+#planner>.validation-card .validation{padding:9px 11px}
+#planner>.validation-card ul{margin:8px 0 2px}
+@media(max-width:800px){#planner>.validation-card{margin:0 0 10px;padding:8px 10px}#planner>.validation-card .validation{font-size:.88rem}#planner>.validation-card ul{font-size:.84rem;padding-left:20px}}

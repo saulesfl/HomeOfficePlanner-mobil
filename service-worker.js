@@ -1,4 +1,4 @@
-const APP_VERSION="0.6.5";
+const APP_VERSION="0.6.6";
 const CACHE=`ho-planner-static-v${APP_VERSION}`;
 const ASSETS=["./","./index.html","./manifest.json","./css/styles.css","./js/holidays-ro.js","./js/rules.js","./js/database.js","./js/calendar.js","./js/backup.js","./js/install.js","./js/app.js","./js/update.js","./icons/icon-192.png","./icons/icon-512.png","./icons/icon-maskable-512.png","./icons/coffee.png"];
 self.addEventListener("install",event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)))});
