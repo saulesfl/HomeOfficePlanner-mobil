@@ -1,4 +1,4 @@
-# Home Office Planner Android PWA v0.6.2
+# Home Office Planner Android PWA v0.6.5
 
 Aplicație complet statică, fără backend, conturi sau sincronizare. Fiecare instalare păstrează datele exclusiv în IndexedDB pe dispozitivul respectiv.
 
@@ -9,7 +9,8 @@ Aplicație complet statică, fără backend, conturi sau sincronizare. Fiecare i
 - calcul local al sărbătorilor legale din România, inclusiv sărbătorile ortodoxe mobile;
 - import pentru backup nativ și format desktop;
 - export JSON complet;
-- atingere directă pe o zi lucrătoare pentru adăugarea sau eliminarea Home Office;
+- bară unică de acțiuni pentru HO, ștergere și absențe;
+- acțiunea selectată se aplică direct la atingerea zilelor din calendar;
 - afișarea denumirii sărbătorii legale la atingerea zilei;
 - copie locală de siguranță înainte de înlocuirea datelor prin import.
 

@@ -25,3 +25,6 @@ test("touch adaugă și elimină Home Office",()=>{const plan={home_office_days:
 test("touch nu înlocuiește absența",()=>{const plan={home_office_days:[],absences:{"2026-10-07":"CO"}},result=calendar.toggleHomeOfficeDay(plan,"2026-10-07");assert.strictEqual(result.changed,false);assert.deepStrictEqual(plan.home_office_days,[]);assert.strictEqual(plan.absences["2026-10-07"],"CO")});
 test("touch blochează weekendul și sărbătoarea",()=>{const plan={home_office_days:[],absences:{}};assert.strictEqual(calendar.toggleHomeOfficeDay(plan,"2026-10-10",{weekend:true}).changed,false);assert.strictEqual(calendar.toggleHomeOfficeDay(plan,"2026-12-25",{holiday:true}).changed,false);assert.deepStrictEqual(plan.home_office_days,[])});
 console.log(`\n${passed} teste statice trecute.`);
+
+const appSource=require("fs").readFileSync(require("path").join(__dirname,"../js/app.js"),"utf8");
+test("persistAndRefresh este definit",()=>assert(appSource.includes("async function persistAndRefresh()")));
