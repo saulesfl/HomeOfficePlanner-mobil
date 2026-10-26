@@ -24,3 +24,7 @@
 /* Instalare iOS, fără spațiu suplimentar deasupra calendarului */
 .ios-install-card{position:relative}.modal-close{position:absolute;right:12px;top:10px;width:42px;height:42px;border:0;border-radius:50%;background:#eef2f7;color:#334155;font-size:1.65rem;line-height:1;cursor:pointer}.ios-install-card h2{margin-top:0;padding-right:42px}.ios-install-steps{padding-left:24px;line-height:1.65}.ios-install-steps li{margin:10px 0}.ios-install-note{color:#64748b;font-size:.9rem}.ios-install-card .primary{min-height:44px;border:0;border-radius:9px;padding:10px 16px;background:var(--blue);color:#fff;font-weight:700;cursor:pointer}
 @media(max-width:420px){#installButton{max-width:104px;white-space:normal;line-height:1.05;padding:7px 8px;font-size:.78rem}}
+
+/* Notificare pentru actualizarea PWA */
+.update-banner{position:fixed;z-index:100;left:50%;bottom:18px;transform:translateX(-50%);width:min(620px,calc(100% - 24px));padding:14px 16px;border:1px solid #93c5fd;border-radius:14px;background:#eff6ff;color:#172033;box-shadow:0 14px 35px #0f172a33}
+.update-banner[hidden]{display:none}.update-banner strong,.update-banner span{display:block}.update-banner span{margin-top:4px;color:#475569;font-size:.9rem}.update-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}.update-actions button{min-height:42px;padding:9px 13px;border:0;border-radius:9px;font:inherit;font-weight:700;cursor:pointer}#updateNowButton{background:var(--blue);color:#fff}#updateLaterButton{background:#dbeafe;color:var(--navy)}

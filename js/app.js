@@ -47,5 +47,4 @@ function renderValidation(){const result=HORules.validateMonth(currentYear,curre
 function renderAvailableLeave(){$("availableLeave").textContent=HORules.availableLeave(currentYear,state.allowance,state.absences)}
 function renderBackupStatus(){if(!state.updated_at){$("saveStatus").textContent="Salvare locală activă.";return}if(!state.last_backup_at){$("saveStatus").textContent="Salvat automat pe dispozitiv · recomandare: exportă un backup.";return}const age=(Date.now()-new Date(state.last_backup_at))/86400000;$("saveStatus").textContent=age>14?"Ultimul backup are peste 14 zile.":"Salvat automat pe dispozitiv."}
 function updateConnection(){const el=$("connectionStatus");el.textContent=navigator.onLine?"Online · datele rămân locale":"Offline · aplicația funcționează local";el.className=navigator.onLine?"status-online":"status-offline"}
-if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js"));
 document.addEventListener("DOMContentLoaded",initialize);
