@@ -35,3 +35,15 @@
 #planner>.validation-card .validation{padding:9px 11px}
 #planner>.validation-card ul{margin:8px 0 2px}
 @media(max-width:800px){#planner>.validation-card{margin:0 0 10px;padding:8px 10px}#planner>.validation-card .validation{font-size:.88rem}#planner>.validation-card ul{font-size:.84rem;padding-left:20px}}
+
+
+/* Rezumatul și regulile rămân sub calendar, astfel încât extinderea regulilor nu mută calendarul. */
+#planner>.summary-compact{margin:14px auto 10px}
+#planner>.validation-card{margin:0 auto 14px}
+.summary-compact .progress{background:#dcfce7}
+.summary-compact .progress>span{background:#16a34a}
+.summary-compact.over-limit{border-color:#ef4444;background:#fef2f2}
+.summary-compact.over-limit .progress{background:#fee2e2}
+.summary-compact.over-limit .progress>span{background:#dc2626}
+.summary-compact.over-limit .summary-main strong{color:#b91c1c}
+@media(max-width:800px){#planner>.summary-compact{margin:10px 0 8px}#planner>.validation-card{margin:0 0 10px}}

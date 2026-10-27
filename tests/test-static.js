@@ -32,3 +32,6 @@ test("persistAndRefresh este definit",()=>assert(appSource.includes("async funct
 const indexSource=require("fs").readFileSync(require("path").join(__dirname,"../index.html"),"utf8");
 test("bara conține CO și nu conține Ștergere",()=>{assert(indexSource.includes('data-mode="CO"'));assert(!indexSource.includes('data-mode="clear"'))});
 test("atingerea unei zile marcate intră în fluxul de ștergere",()=>assert(appSource.includes('if(oldAction){')));
+
+test("rezumatul și validarea sunt sub calendar",()=>{assert(indexSource.indexOf('id="calendarSwipeArea"')<indexSource.indexOf('class="summary-compact"'));assert(indexSource.indexOf('class="summary-compact"')<indexSource.indexOf('class="validation-card"'))});
+test("depășirea limitei activează clasa over-limit",()=>assert(appSource.includes('classList.toggle("over-limit",result.selected_ho>result.maximum_ho)')));
