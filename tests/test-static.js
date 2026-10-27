@@ -28,3 +28,7 @@ console.log(`\n${passed} teste statice trecute.`);
 
 const appSource=require("fs").readFileSync(require("path").join(__dirname,"../js/app.js"),"utf8");
 test("persistAndRefresh este definit",()=>assert(appSource.includes("async function persistAndRefresh()")));
+
+const indexSource=require("fs").readFileSync(require("path").join(__dirname,"../index.html"),"utf8");
+test("bara conține CO și nu conține Ștergere",()=>{assert(indexSource.includes('data-mode="CO"'));assert(!indexSource.includes('data-mode="clear"'))});
+test("atingerea unei zile marcate intră în fluxul de ștergere",()=>assert(appSource.includes('if(oldAction){')));

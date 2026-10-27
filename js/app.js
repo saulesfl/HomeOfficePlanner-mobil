@@ -32,7 +32,7 @@ async function refresh(){holidays=HOHolidays.romanianHolidays(currentYear);$("mo
 function renderCalendar(){const grid=$("calendarGrid");grid.innerHTML="";for(const date of buildCalendarDates(currentYear,currentMonth)){const key=isoLocal(date),button=document.createElement("button");button.className="day";if(date.getMonth()+1!==currentMonth)button.classList.add("other");if([0,6].includes(date.getDay()))button.classList.add("weekend");if(holidays[key])button.classList.add("holiday");if(state.home_office_days.includes(key))button.classList.add("ho");if(state.absences[key]){button.classList.add("absence");button.classList.add(state.absences[key]==="CO"?"co":state.absences[key]==="Bo"?"bo":"other-absence")}if(key===isoLocal(today))button.classList.add("today");const label=state.home_office_days.includes(key)?"HO":absenceLabel(state.absences[key]||"");button.innerHTML=`<span class="day-number">${date.getDate()}</span>${label?`<span class="day-label">${label}</span>`:""}${holidays[key]?`<span class="holiday-name">${holidays[key]}</span>`:""}`;button.setAttribute("aria-label",`${date.toLocaleDateString("ro-RO")}${label?`, ${label}`:""}`);button.dataset.date=key;grid.appendChild(button)}}
 async function selectDay(key){await applyCalendarAction(key,activeMode)}
 function vibrate(pattern){if("vibrate" in navigator)navigator.vibrate(pattern)}
-function actionLabel(mode){return {ho:"Home Office",CO:"CO",Bo:"BO",Fp:"FP",Lp:"LP",R:"R",clear:"Ștergere"}[mode]||"Home Office"}
+function actionLabel(mode){return {ho:"Home Office",CO:"CO",Bo:"BO",Fp:"FP",Lp:"LP",R:"R"}[mode]||"Home Office"}
 function setMode(mode){
   activeMode=mode||"ho";
   document.querySelectorAll("[data-mode]").forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.mode===activeMode)));
@@ -45,18 +45,16 @@ function existingAction(key){if(state.home_office_days.includes(key))return "ho"
 function formatDay(key){return new Date(`${key}T12:00:00`).toLocaleDateString("ro-RO",{day:"numeric",month:"long"})}
 async function applyCalendarAction(key,action){
   const date=new Date(`${key}T12:00:00`),weekend=[0,6].includes(date.getDay()),holiday=Boolean(HOHolidays.romanianHolidays(date.getFullYear())[key]);
-  if(action!=="clear"&&(weekend||holiday)){toast(weekend?"Planificarea nu este permisă în weekend.":"Planificarea nu este permisă într-o sărbătoare legală.");return}
   const oldAction=existingAction(key);
-  if(action==="clear"){
-    if(!oldAction){toast("Ziua nu conține nicio înregistrare.");setMode("ho");return}
+  if(oldAction){
     const oldHo=oldAction==="ho",oldAbsence=oldHo?null:oldAction;
     state.home_office_days=state.home_office_days.filter(value=>value!==key);delete state.absences[key];undoDelete={key,oldHo,oldAbsence};
-    await persistAndRefresh();vibrate([30,45,30]);toastUndo(`${formatDay(key)}: ${actionLabel(oldAction)} a fost șters.`);setMode("ho");return
+    await persistAndRefresh();vibrate([30,45,30]);toastUndo(`${formatDay(key)}: ${actionLabel(oldAction)} a fost șters.`);return
   }
-  state.home_office_days=state.home_office_days.filter(value=>value!==key);delete state.absences[key];
+  if(weekend||holiday){toast(weekend?"Planificarea nu este permisă în weekend.":"Planificarea nu este permisă într-o sărbătoare legală.");return}
   if(action==="ho")state.home_office_days.push(key);else state.absences[key]=action;
   state.home_office_days=[...new Set(state.home_office_days)].sort();await persistAndRefresh();vibrate(30);
-  toast(oldAction&&oldAction!==action?`${formatDay(key)}: ${actionLabel(oldAction)} a fost înlocuit cu ${actionLabel(action)}.`:`${formatDay(key)}: ${actionLabel(action)} a fost adăugat.`)
+  toast(`${formatDay(key)}: ${actionLabel(action)} a fost adăugat.`)
 }
 function toastUndo(text){const el=$("toast");el.innerHTML="";el.append(document.createTextNode(text));const button=document.createElement("button");button.className="toast-action";button.textContent="Anulează";button.onclick=undoLastDelete;el.append(button);el.classList.add("show");clearTimeout(toast.timer);toast.timer=setTimeout(()=>{el.classList.remove("show");undoDelete=null},5000)}
 async function undoLastDelete(){if(!undoDelete)return;const {key,oldHo,oldAbsence}=undoDelete;if(oldHo)state.home_office_days.push(key);if(oldAbsence)state.absences[key]=oldAbsence;state.home_office_days=[...new Set(state.home_office_days)].sort();undoDelete=null;await persistAndRefresh();vibrate(30);toast("Ștergerea a fost anulată")}
