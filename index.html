@@ -7,7 +7,7 @@
 </head>
 <body>
 <header class="app-header">
-  <div class="brand"><img src="./icons/icon-192.png" alt=""><div><p class="eyebrow">PWA Android offline</p><h1>Home Office Planner <small>v0.6.8</small></h1></div></div>
+  <div class="brand"><img src="./icons/icon-192.png" alt=""><div><p class="eyebrow">PWA Android offline</p><h1>Home Office Planner <small>v0.6.9</small></h1></div></div>
   <div class="header-tools"><button id="installButton" class="ghost" hidden>Instalează</button><button id="menuButton" class="menu-button" aria-label="Deschide meniul" aria-expanded="false">⋮</button>
     <div id="appMenu" class="app-menu" hidden><button id="exportButton">Exportă backup</button><label>Importă backup<input id="importInput" type="file" accept="application/json,.json"></label><a href="https://revolut.me/florinsaulescu" target="_blank" rel="noopener noreferrer">☕ Susține aplicația</a></div>
   </div>
@@ -25,11 +25,13 @@
       </div>
       <div id="modeMessage" class="mode-message" aria-live="polite"><strong>Acțiune activă:</strong> Home Office</div>
       <div class="weekdays"><span>Lu</span><span>Ma</span><span>Mi</span><span>Jo</span><span>Vi</span><span>Sa</span><span>Du</span></div><div id="calendarGrid" class="calendar-grid"></div></section>
-    <aside class="side-card"><h3>Concediu și legendă</h3><label>Total concediu anual <input id="allowanceInput" type="number" min="0" inputmode="numeric"></label><details class="legend"><summary>Legendă</summary><b>HO</b> Home Office · <b>CO</b> concediu<br><b>BO</b> medical · <b>FP</b> fără plată · <b>LP</b> liber plătit · <b>R</b> recuperare</details></aside>
-  </div>
-  <section class="summary-compact" aria-label="Rezumat lunar"><div class="summary-main"><span>Home Office</span><strong><span id="selectedHo">0</span> / <span id="maximumHo">0</span> zile</strong></div><div class="progress" aria-hidden="true"><span id="hoProgress"></span></div><p>Luni / Vineri: <b id="weekLinks">0 / 0</b><span>·</span> Concediu: <b id="availableLeave">0</b> zile</p></section>
-  <section class="validation-card"><div id="validationStatus" class="validation pending">Se verifică...</div><button id="validationToggle" class="validation-toggle" aria-expanded="false">Vezi regulile</button><ul id="validationList" hidden></ul></section>
 
+  </div>
+  <section class="plan-overview" aria-label="Rezumat și validare plan">
+<section class="summary-compact" aria-label="Rezumat lunar"><div class="summary-main"><span>Home Office</span><strong><span id="selectedHo">0</span> / <span id="maximumHo">0</span> zile</strong></div><div class="progress" aria-hidden="true"><span id="hoProgress"></span></div><p>Luni / Vineri: <b id="weekLinks">0 / 0</b></p></section>
+  <section class="validation-card"><div id="validationStatus" class="validation pending">Se verifică...</div><button id="validationToggle" class="validation-toggle" aria-expanded="false">Vezi regulile</button><ul id="validationList" hidden></ul></section>
+  </section>
+  <aside class="side-card"><h3>Concediu și legendă</h3><label>Total concediu anual <input id="allowanceInput" type="number" min="0" inputmode="numeric"></label><p class="leave-remaining">Concediu rămas: <strong><span id="availableLeave">0</span> zile</strong></p><details class="legend"><summary>Legendă</summary><b>HO</b> Home Office · <b>CO</b> concediu<br><b>BO</b> medical · <b>FP</b> fără plată · <b>LP</b> liber plătit · <b>R</b> recuperare</details></aside>
 </section>
 <div class="footer-row"><span id="saveStatus" class="save-status">Salvare locală activă.</span><span id="connectionStatus">Offline ready</span></div>
 </main>

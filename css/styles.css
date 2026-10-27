@@ -10,8 +10,10 @@
 .mode-bar.mode-ho{border-color:#2563eb;background:#dbeafe}.mode-bar [data-mode="ho"]{color:#1d4ed8}
 .mode-bar.mode-CO{border-color:#7c3aed;background:#f3e8ff}.mode-bar [data-mode="CO"]{color:#6d28d9}
 .mode-bar.mode-Bo{border-color:#ea580c;background:#ffedd5}.mode-bar [data-mode="Bo"]{color:#c2410c}
+.mode-bar.mode-clear{border-color:#dc2626;background:#fee2e2}.mode-bar [data-mode="clear"]{color:#b91c1c}
 .mode-bar.mode-Fp,.mode-bar.mode-Lp,.mode-bar.mode-R{border-color:#475569;background:#f1f5f9}
 .mode-message{margin:0 0 9px;padding:8px 10px;border-radius:8px;background:#eef2f7;color:#334155;font-weight:750}
+.mode-bar.mode-clear+.mode-message{background:#fee2e2;color:#991b1b}
 .more-modes{position:relative}.more-modes>summary{list-style:none}.more-modes>summary::-webkit-details-marker{display:none}.more-modes>div{position:absolute;z-index:20;top:calc(100% + 5px);right:0;min-width:190px;padding:6px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;box-shadow:0 10px 25px #0f172a30}.more-modes button{display:block;width:100%;min-height:44px;border:0;border-radius:7px;background:#fff;text-align:left;font:inherit;cursor:pointer}
 .day.co{background:#f3e8ff;border-color:#8b5cf6}.day.bo{background:#ffedd5;border-color:#f97316}.day.other-absence{background:#f1f5f9;border-color:#64748b}
 .toast-action{border:0;background:transparent;color:#93c5fd;font:inherit;font-weight:800;text-decoration:underline;cursor:pointer;margin-left:10px}
@@ -37,13 +39,17 @@
 @media(max-width:800px){#planner>.validation-card{margin:0 0 10px;padding:8px 10px}#planner>.validation-card .validation{font-size:.88rem}#planner>.validation-card ul{font-size:.84rem;padding-left:20px}}
 
 
-/* Rezumatul și regulile rămân sub calendar, astfel încât extinderea regulilor nu mută calendarul. */
-#planner>.summary-compact{margin:14px auto 10px}
-#planner>.validation-card{margin:0 auto 14px}
+/* v0.6.9: calendar compact, rezumat și reguli unite, concediu anual ultimul. */
+.day{min-height:58px}
+.plan-overview{max-width:760px;margin:14px auto;padding:12px;border:1px solid #dbe3ec;border-radius:14px;background:#fff}
+.plan-overview .summary-compact,.plan-overview .validation-card{max-width:none;margin:0;padding:0;border:0;background:transparent;box-shadow:none}
+.plan-overview .validation-card{margin-top:8px;padding-top:8px;border-top:1px solid #e2e8f0}
 .summary-compact .progress{background:#dcfce7}
 .summary-compact .progress>span{background:#16a34a}
-.summary-compact.over-limit{border-color:#ef4444;background:#fef2f2}
 .summary-compact.over-limit .progress{background:#fee2e2}
 .summary-compact.over-limit .progress>span{background:#dc2626}
 .summary-compact.over-limit .summary-main strong{color:#b91c1c}
-@media(max-width:800px){#planner>.summary-compact{margin:10px 0 8px}#planner>.validation-card{margin:0 0 10px}}
+#planner>.side-card{max-width:760px;margin:14px auto;position:static;transform:none;max-height:none;overflow:visible}
+.leave-remaining{display:flex;justify-content:space-between;gap:12px;margin:12px 0 0;padding-top:10px;border-top:1px solid #e2e8f0}
+@media(max-width:800px){.day{min-height:54px}.plan-overview{margin:10px 0;padding:10px}#planner>.side-card{margin:10px 0;padding:16px;position:static;transform:none;max-height:none;overflow:visible;border-radius:14px}#planner>.side-card>label,#planner>.side-card>.legend{display:block}}
+@media(max-width:420px){.day{min-height:48px}}
