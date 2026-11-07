@@ -1,4 +1,4 @@
-# Home Office Planner Android PWA v0.6.12
+# Home Office Planner Android PWA v1.0
 
 Aplicație complet statică, fără backend, conturi sau sincronizare. Fiecare instalare păstrează datele exclusiv în IndexedDB pe dispozitivul respectiv.
 
