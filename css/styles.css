@@ -53,3 +53,10 @@
 .leave-remaining{display:flex;justify-content:space-between;gap:12px;margin:12px 0 0;padding-top:10px;border-top:1px solid #e2e8f0}
 @media(max-width:800px){.day{min-height:54px}.plan-overview{margin:10px 0;padding:10px}#planner>.side-card{margin:10px 0;padding:16px;position:static;transform:none;max-height:none;overflow:visible;border-radius:14px}#planner>.side-card>label,#planner>.side-card>.legend{display:block}}
 @media(max-width:420px){.day{min-height:48px}}
+
+
+/* v0.6.10: sold CO cu report automat din anul anterior. */
+.leave-balance{margin-top:12px;padding-top:10px;border-top:1px solid #e2e8f0}
+.leave-balance p{display:flex;justify-content:space-between;gap:12px;margin:7px 0;color:#475569}
+.leave-balance .leave-remaining{margin-top:0;color:#172033;font-weight:700}
+.leave-balance small{display:block;margin-top:8px;color:#64748b}

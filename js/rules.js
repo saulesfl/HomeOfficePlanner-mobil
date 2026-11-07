@@ -4,7 +4,17 @@
   const iso=date=>root.HOHolidays.iso(date);
   function normalWorkdays(year,month){const holidays=root.HOHolidays.romanianHolidays(year),last=new Date(year,month,0).getDate(),out=[];for(let day=1;day<=last;day++){const date=new Date(year,month-1,day,12),key=iso(date);if(![0,6].includes(date.getDay())&&!holidays[key])out.push(key)}return out}
   function leaveUsed(year,absences){return Object.entries(absences||{}).filter(([date,code])=>date.startsWith(`${year}-`)&&code==="CO").length}
-  function availableLeave(year,allowance,absences){return Math.max(0,Number(allowance?.[year]??allowance?.[String(year)]??0)-leaveUsed(year,absences))}
+  function annualAllowance(year,allowance){return Math.max(0,Number(allowance?.[year]??allowance?.[String(year)]??0))}
+  function leaveBalance(year,allowance,absences){
+    const carriedFromPrevious=Math.max(0,annualAllowance(year-1,allowance)-leaveUsed(year-1,absences));
+    const currentAllowance=annualAllowance(year,allowance),used=leaveUsed(year,absences);
+    const usedFromCarryover=Math.min(used,carriedFromPrevious);
+    const carryoverRemaining=carriedFromPrevious-usedFromCarryover;
+    const usedFromCurrent=Math.max(0,used-carriedFromPrevious);
+    const currentRemaining=Math.max(0,currentAllowance-usedFromCurrent);
+    return {year,currentAllowance,carriedFromPrevious,used,usedFromCarryover,usedFromCurrent,carryoverRemaining,currentRemaining,totalRemaining:carryoverRemaining+currentRemaining}
+  }
+  function availableLeave(year,allowance,absences){return leaveBalance(year,allowance,absences).totalRemaining}
   function validateMonth(year,month,homeOffice,absences){const work=new Set(normalWorkdays(year,month)),absenceDates=Array.isArray(absences)?absences:Object.keys(absences||{}),absenceSet=new Set(absenceDates),effective=new Set([...work].filter(date=>!absenceSet.has(date))),prefix=`${year}-${String(month).padStart(2,"0")}-`,selected=[...new Set(homeOffice||[])].filter(date=>date.startsWith(prefix)),invalid=selected.filter(date=>!effective.has(date)).sort(),mondays=selected.filter(date=>parse(date).getDay()===1).length,fridays=selected.filter(date=>parse(date).getDay()===5).length,weekendLinks=mondays+fridays,pairs=[],all=new Set(homeOffice||[]);[...all].filter(date=>parse(date).getDay()===5).forEach(friday=>{const monday=parse(friday);monday.setDate(monday.getDate()+3);const mondayIso=iso(monday);if(all.has(mondayIso))pairs.push([friday,mondayIso])});const maximum=Math.ceil(effective.size*0.5),checks={percentage:selected.length<=maximum,mondays:mondays<=MAX_MONDAYS,fridays:fridays<=MAX_FRIDAYS,weekend_links:weekendLinks<=MAX_WEEKEND_LINKS,sandwich:pairs.length===0,eligible_days:invalid.length===0};return {valid:Object.values(checks).every(Boolean),checks,normal_workdays:work.size,effective_workdays:effective.size,maximum_ho:maximum,selected_ho:selected.length,mondays,fridays,weekend_links:weekendLinks,invalid_days:invalid,sandwich_pairs:pairs}}
-  root.HORules={normalWorkdays,validateMonth,leaveUsed,availableLeave};if(typeof module!=="undefined")module.exports=root.HORules;
+  root.HORules={normalWorkdays,validateMonth,leaveUsed,annualAllowance,leaveBalance,availableLeave};if(typeof module!=="undefined")module.exports=root.HORules;
 })(typeof globalThis!=="undefined"?globalThis:this);

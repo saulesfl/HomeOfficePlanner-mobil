@@ -6,3 +6,9 @@ Desktop.ini
 *.log
 *.tmp
 *.bak
+# Fișiere ale sistemului de operare
+.DS_Store
+Thumbs.db
+# Copilot transfer automation
+Copilot-Transfer-Scripts/
+.copilot_backups/
